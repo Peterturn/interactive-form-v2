@@ -25,7 +25,6 @@ selectTheme.remove(selectTheme.firstElementChild);}
 selected = true and disabled = true forcing the user to select a t-shirt theme before continuing.
  */
 
-
 function appOpt() {
 const options = document.createElement("option");
 colors.insertBefore(options, colors[0]);
@@ -42,49 +41,19 @@ cC[0].textContent='Please select a T-shirt theme';
 cC[0].selected = true;
 cC[0].disabled = true;
 
-function option1 (){
-for (let i=0; i<3; i+=1){
-  cC[i].className =  'optOne';
-  }
-}
-option1 ()
 
 selectTheme.addEventListener('click', (e) => {
   if(colors.firstElementChild.innerText === 'Please select a T-shirt theme'){
     colors.remove(colors.firstElementChild);}
 
-  if (selectTheme.firstElementChild.innerText === 'Theme - JS Puns'){
+  const optTheme1 = selectTheme.firstElementChild;
+  const optTheme2 = optTheme1.nextElementSibling;
+
+  if (optTheme1){
     for (let i=0; i<3; i+= 1){
-      cC[i].style.display = '';}
-    }else{
-      for (let i=3; i<6; i+= 1){
-      cC[i].style.display='none';}
-      }
-  if (selectTheme.firstElementChild.nextElementSibling.innerText == 'Theme - I &#9829; JS'){
-      for (let i=3; i<6; i+= 1){
-        cC[i].style.display= '';}
-      }else{
-        for (let i=0; i<3; i+= 1){
-        cC[i].style.display='none';}
-      }
-
-  });
-  //   else{
-  //   for (let i=0; i<3; i+= 1){
-  //     cC[i].style.display='none';}
-  //   for (let j=3; j>3 && j<6; j+= 1){
-  //     cC[j].style.display='';
-  //   }
-  // }
-
-
-
-// T-Shirt selct options
-// for (let i=0; i<colors.length; i++){
-// if (i<=3){
-//
-// }else if (i>=3 && i<=6) {
-//
-// }
-//
-// };
+      cC[i].style.display='';}
+  }else if (optTheme2) {
+    for (let i=4; i<6; i+= 1){
+      cC[i].style.display='';}
+  }
+});
