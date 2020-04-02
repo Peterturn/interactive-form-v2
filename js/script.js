@@ -42,18 +42,19 @@ cC[0].selected = true;
 cC[0].disabled = true;
 
 
-selectTheme.addEventListener('click', (e) => {
+selectTheme.addEventListener('change', (e) => {
+  if (selectTheme.firstElementChild.innerText === 'Theme - JS Puns'){
+    if(colors.firstElementChild.innerText === 'Please select a T-shirt theme'){
+      colors.remove(colors.firstElementChild);}
+      cC[0].style.display = '';
+      cC[1].style.display = '';
+      cC[2].style.display = '';
+}
+else if (selectTheme.firstElementChild.innerText == 'Theme - I &#9829; JS') {
   if(colors.firstElementChild.innerText === 'Please select a T-shirt theme'){
     colors.remove(colors.firstElementChild);}
-
-  const optTheme1 = selectTheme.firstElementChild;
-  const optTheme2 = optTheme1.nextElementSibling;
-
-  if (optTheme1){
-    for (let i=0; i<3; i+= 1){
-      cC[i].style.display='';}
-  }else if (optTheme2) {
-    for (let i=4; i<6; i+= 1){
-      cC[i].style.display='';}
-  }
+    cC[3].style.display = '';
+    cC[4].style.display = '';
+    cC[5].style.display = '';
+}
 });
