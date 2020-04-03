@@ -1,3 +1,4 @@
+                        //Global Var
 
 //Selects the T-shirt "Design:" drop down list node and children
 const selectTheme = document.getElementById('design');
@@ -7,11 +8,15 @@ const sTC = selectTheme.children;
 const colors = document.getElementById('color');
 const cC = colors.children;
 
+//global var for the over all cost of the activities section
+let activities = document.querySelector('.activities');
+
 //Sets focus on the name field at the loading of the page
 document.getElementById('name').focus();
 
 /*Hides html element at the loading of page but will appear if java script is not working.*/
 document.getElementById('other-title').style.display = 'none';
+
 
 /*removes the select Theme node from the list of options IN the "Design:" list
 but only after the mouseover.
@@ -31,7 +36,7 @@ colors.insertBefore(options, colors[0]);
 }
 appOpt();
 
-// for I loop that hides all theme options and sets classNames
+// for I loop that hides all theme options and sets classNames as an optional selection method
 for (let i = 1; i < cC.length; i++){
   cC[i].style.display = 'none';
   if(i<4)
@@ -67,4 +72,16 @@ else if (e.target.value == "js puns") {
   cC[6].style.display = 'none';
 }
 });
-// ^CODE WORKS^ dont Touch!! v This Code v is in progress
+
+//Var for the total cost of all activities.
+let totalCost = 0;
+
+function costDiv() {
+const div = document.createElement("div");
+div.className = 'activities';
+div.innerText = 'Total Cost: $ ' +totalCost;
+activities.appendChild(div);
+}
+costDiv();
+
+// ^CODE WORKS^ dont Touch!! v Code below v is in progress
