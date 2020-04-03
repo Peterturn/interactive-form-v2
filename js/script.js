@@ -9,8 +9,8 @@ const colors = document.getElementById('color');
 const cC = colors.children;
 
 //global var for the over all cost of the activities section
-let activities = document.querySelector('.activities');
-
+const activities = document.querySelector('.activities');
+const actCheckboxs = activities.children;
 //Sets focus on the name field at the loading of the page
 document.getElementById('name').focus();
 
@@ -85,3 +85,9 @@ activities.appendChild(div);
 costDiv();
 
 // ^CODE WORKS^ dont Touch!! v Code below v is in progress
+
+activities.addEventListener('change', (e) => {
+  let dataCost = e.target.getAttribute('data-cost');
+  totalCost += dataCost;
+  console.log(dataCost);
+});
