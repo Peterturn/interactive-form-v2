@@ -87,7 +87,7 @@ costDiv();
 // ^CODE WORKS^ dont Touch!! v Code below v is in progress
 
 activities.addEventListener('change', (e) => {
-  let dataCost = e.target.getAttribute('data-cost');
+  let dataCost = e.target.getAttribute("data-cost");
   totalCost += dataCost;
   console.log(dataCost);
 });
