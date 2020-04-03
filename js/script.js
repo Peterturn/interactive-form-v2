@@ -16,24 +16,27 @@ document.getElementById('other-title').style.display = 'none';
 /*removes the select Theme node from the list of options IN the "Design:" list
 but only after the mouseover.
 */
-selectTheme.addEventListener('click', (e) => {
-  if (selectTheme.firstElementChild.innerText === 'Select Theme'){
-selectTheme.remove(selectTheme.firstElementChild);}
-});
+selectTheme.addEventListener('mouseover', (e) => {
+  if (sTC[0].innerText === 'Select Theme'){
+sTC[0].style.display = 'none';
+sTC[0].disabled = true;
+}});
 
 /*Function creates and option inside the "colors drop down menu" later this option
 selected = true and disabled = true forcing the user to select a t-shirt theme before continuing.
  */
-
 function appOpt() {
 const options = document.createElement("option");
 colors.insertBefore(options, colors[0]);
 }
 appOpt();
 
-// for I loop that hides all theme options
+// for I loop that hides all theme options and sets classNames
 for (let i = 1; i < cC.length; i++){
-  cC[i].style.display='none';
+  cC[i].style.display = 'none';
+  if(i<4)
+  {cC[i].className = 'jsPuns';}
+  else{cC[i].className = 'iHeart';}
 }
 
 //creates a 'Please select a T-shirt theme' inside the drop down menu.
@@ -41,20 +44,27 @@ cC[0].textContent='Please select a T-shirt theme';
 cC[0].selected = true;
 cC[0].disabled = true;
 
-
+//based on user selection of Design, the Color Menu's options change.
+// CLEAN UP CODE LATER
 selectTheme.addEventListener('change', (e) => {
-  if (selectTheme.firstElementChild.innerText === 'Theme - JS Puns'){
-    if(colors.firstElementChild.innerText === 'Please select a T-shirt theme'){
-      colors.remove(colors.firstElementChild);}
-      cC[0].style.display = '';
-      cC[1].style.display = '';
-      cC[2].style.display = '';
+if(e.target.value == "heart js"){
+  cC[0].style.display = 'none';
+  cC[1].style.display = 'none';
+  cC[2].style.display = 'none';
+  cC[3].style.display = 'none';
+  cC[4].style.display = '';
+  cC[5].style.display = '';
+  cC[6].style.display = '';
 }
-else if (selectTheme.firstElementChild.innerText == 'Theme - I &#9829; JS') {
-  if(colors.firstElementChild.innerText === 'Please select a T-shirt theme'){
-    colors.remove(colors.firstElementChild);}
-    cC[3].style.display = '';
-    cC[4].style.display = '';
-    cC[5].style.display = '';
+//next part of statement
+else if (e.target.value == "js puns") {
+  cC[0].style.display = 'none';
+  cC[1].style.display = '';
+  cC[2].style.display = '';
+  cC[3].style.display = '';
+  cC[4].style.display = 'none';
+  cC[5].style.display = 'none';
+  cC[6].style.display = 'none';
 }
 });
+// ^CODE WORKS^ dont Touch!! v This Code v is in progress
