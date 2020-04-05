@@ -76,6 +76,7 @@ else if (e.target.value == "js puns") {
 //Var for the total cost of all activities.
 let totalCost = 0;
 
+/*function appends a dom element at the end of the activities section with the total cost of activities.*/
 function costDiv() {
 const div = document.createElement("div");
 div.className = 'activities';
@@ -85,15 +86,18 @@ activities.appendChild(div);
 }
 costDiv();
 
-let divInnerHTML = document.getElementById('total');
-// ^CODE WORKS^ dont Touch!! v Code below v is in progress
 
 activities.addEventListener('change', (e) => {
+  let divInnerHTML = document.getElementById('total');
   let isChecked = e.target.checked;
+  const checkBoxes = activities.querySelectorAll('input[type="checkbox"]');
+  let dayTime = e.target.getAttribute("data-day-and-time");
+
+  //if statements that updates total cost.
   if (isChecked === true ){
-  let dataCost = parseInt(e.target.getAttribute("data-cost"));
-  totalCost += dataCost;
-  divInnerHTML.innerText = 'Total Cost: $ '+totalCost;}
+    let dataCost = parseInt(e.target.getAttribute("data-cost"));
+    totalCost += dataCost;
+    divInnerHTML.innerText = 'Total Cost: $ '+totalCost;}
   else if (isChecked === false ){
     let dataCost = parseInt(e.target.getAttribute("data-cost"));
     totalCost -= dataCost;
