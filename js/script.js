@@ -90,6 +90,7 @@ costDiv();
 activities.addEventListener('change', (e) => {
   let divInnerHTML = document.getElementById('total');
   let isChecked = e.target.checked;
+  let eTarget = e.target;
   const checkBoxes = activities.querySelectorAll('input[type="checkbox"]');
   let dayTime = e.target.getAttribute("data-day-and-time");
 
@@ -109,10 +110,10 @@ activities.addEventListener('change', (e) => {
   for (let i = 1; i<checkBoxes.length; i++){
     let dayTimeOther = checkBoxes[i].getAttribute("data-day-and-time");
 
-      if (dayTime === dayTimeOther && checkBoxes[i] !== isChecked){
-        if(isChecked){
+      if (dayTime === dayTimeOther && checkBoxes[i] !== eTarget){
+        if(eTarget === true ){
         checkBoxes[i].disabled = true;
-        isChecked.disabled = false;
+        eTarget.disabled = false;
       }
       }
       else {
