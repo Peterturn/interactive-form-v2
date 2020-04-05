@@ -86,7 +86,7 @@ activities.appendChild(div);
 }
 costDiv();
 
-
+//addEventListener that updates cost an disbales selections based on conflict
 activities.addEventListener('change', (e) => {
   let divInnerHTML = document.getElementById('total');
   let isChecked = e.target.checked;
@@ -97,11 +97,27 @@ activities.addEventListener('change', (e) => {
   if (isChecked === true ){
     let dataCost = parseInt(e.target.getAttribute("data-cost"));
     totalCost += dataCost;
-    divInnerHTML.innerText = 'Total Cost: $ '+totalCost;}
+    divInnerHTML.innerText = 'Total Cost: $ '+totalCost;
+  }
   else if (isChecked === false ){
     let dataCost = parseInt(e.target.getAttribute("data-cost"));
     totalCost -= dataCost;
     divInnerHTML.innerText = 'Total Cost: $ '+totalCost;}
-});
 
-// ^CODE WORKS^ dont Touch!! v Code below v is in progress
+// ^CODE WORKS^ dont Touch!! v Code below v is in progress.
+
+  for (let i = 1; i<checkBoxes.length; i++){
+    let dayTimeOther = checkBoxes[i].getAttribute("data-day-and-time");
+
+      if (dayTime === dayTimeOther && checkBoxes[i] !== isChecked){
+        if(isChecked){
+        checkBoxes[i].disabled = true;
+        isChecked.disabled = false;
+      }
+      }
+      else {
+        checkBoxes[i].disabled = false;
+      }
+    }
+
+});
