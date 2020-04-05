@@ -79,15 +79,25 @@ let totalCost = 0;
 function costDiv() {
 const div = document.createElement("div");
 div.className = 'activities';
+div.id = 'total';
 div.innerText = 'Total Cost: $ ' +totalCost;
 activities.appendChild(div);
 }
 costDiv();
 
+let divInnerHTML = document.getElementById('total');
 // ^CODE WORKS^ dont Touch!! v Code below v is in progress
 
 activities.addEventListener('change', (e) => {
-  let dataCost = e.target.getAttribute("data-cost");
+  let isChecked = e.target.checked;
+  if (isChecked === true ){
+  let dataCost = parseInt(e.target.getAttribute("data-cost"));
   totalCost += dataCost;
-  console.log(dataCost);
+  divInnerHTML.innerText = 'Total Cost: $ '+totalCost;}
+  else if (isChecked === false ){
+    let dataCost = parseInt(e.target.getAttribute("data-cost"));
+    totalCost -= dataCost;
+    divInnerHTML.innerText = 'Total Cost: $ '+totalCost;}
 });
+
+// ^CODE WORKS^ dont Touch!! v Code below v is in progress
