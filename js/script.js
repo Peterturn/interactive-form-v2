@@ -1,5 +1,7 @@
-                        //Global Var
+                        //Global Var Section
 
+
+const otherTitleTextArea = document.getElementById('other-title');
 //Selects the T-shirt "Design:" drop down list node and children
 const selectTheme = document.getElementById('design');
 const sTC = selectTheme.children;
@@ -11,14 +13,36 @@ const cC = colors.children;
 //global var for the over all cost of the activities section
 const activities = document.querySelector('.activities');
 const actCheckboxs = activities.children;
+
+//payment section global var
+const payment = document.getElementById('payment');
+const paymentOptions = payment.children;
+const creditCard = document.getElementById('credit-card');
+const payPal = document.getElementById('paypal');
+const bitcoin = document.getElementById('bitcoin');
+
+
 //Sets focus on the name field at the loading of the page
 document.getElementById('name').focus();
 
 /*Hides html element at the loading of page but will appear if java script is not working.*/
-document.getElementById('other-title').style.display = 'none';
+otherTitleTextArea.style.display = 'none';
+
+//payment section preset display properties to hide the paypal and bitcoin messages.
+payPal.style.display = 'none';
+bitcoin.style.display = 'none';
 
 
-/*removes the select Theme node from the list of options IN the "Design:" list
+const titleDropList = document.getElementById('title');
+
+//If job role other is chosen, the hidden text area will display for the user.
+titleDropList.addEventListener('change', (e)=>{
+  if (e.target.value == "other"){
+  otherTitleTextArea.style.display = '';
+  }
+});
+
+/*Removes the select Theme node from the list of options IN the "Design:" list
 but only after the mouseover.
 */
 selectTheme.addEventListener('mouseover', (e) => {
@@ -26,6 +50,7 @@ selectTheme.addEventListener('mouseover', (e) => {
 sTC[0].style.display = 'none';
 sTC[0].disabled = true;
 }});
+
 
 /*Function creates and option inside the "colors drop down menu" later this option
 selected = true and disabled = true forcing the user to select a t-shirt theme before continuing.
@@ -89,36 +114,59 @@ costDiv();
 //addEventListener that updates cost an disbales selections based on conflict
 activities.addEventListener('change', (e) => {
   let divInnerHTML = document.getElementById('total');
-  let isChecked = e.target.checked;
-  let eTarget = e.target;
+  let changedCheckbox = e.target;
+  let isChecked = changedCheckbox.checked;
   const checkBoxes = activities.querySelectorAll('input[type="checkbox"]');
-  let dayTime = e.target.getAttribute("data-day-and-time");
+  let dayTime = changedCheckbox.getAttribute("data-day-and-time");
 
   //if statements that updates total cost.
-  if (isChecked === true ){
-    let dataCost = parseInt(e.target.getAttribute("data-cost"));
+  if (isChecked){
+    let dataCost = parseInt(changedCheckbox.getAttribute("data-cost"));
     totalCost += dataCost;
     divInnerHTML.innerText = 'Total Cost: $ '+totalCost;
   }
   else if (isChecked === false ){
-    let dataCost = parseInt(e.target.getAttribute("data-cost"));
+    let dataCost = parseInt(changedCheckbox.getAttribute("data-cost"));
     totalCost -= dataCost;
     divInnerHTML.innerText = 'Total Cost: $ '+totalCost;}
 
-// ^CODE WORKS^ dont Touch!! v Code below v is in progress.
-
+//Statement that compares time and date and disbales the other option if conflicting.
   for (let i = 1; i<checkBoxes.length; i++){
     let dayTimeOther = checkBoxes[i].getAttribute("data-day-and-time");
 
-      if (dayTime === dayTimeOther && checkBoxes[i] !== eTarget){
-        if(eTarget === true ){
+      if (dayTime === dayTimeOther && checkBoxes[i] !== changedCheckbox){
+        if(isChecked){
         checkBoxes[i].disabled = true;
-        eTarget.disabled = false;
-      }
-      }
-      else {
+        changedCheckbox.disabled = false;
+      }else{
         checkBoxes[i].disabled = false;
       }
-    }
-
+      }
+  }
 });
+
+// Hides the "select payment methode" inside the menu.
+payment.addEventListener('mouseover', (e) => {
+  if (paymentOptions[0].innerText === 'Select Payment Method'){
+paymentOptions[0].style.display = 'none';
+paymentOptions[0].disabled = true;
+}});
+
+//Based on user selection the payment option screen display changes.
+payment.addEventListener('change', (e) => {
+if(e.target.value == "credit card"){
+  creditCard.style.display = 'block';
+  payPal.style.display = 'none';
+  bitcoin.style.display = 'none';
+} else if (e.target.value == "paypal"){
+  creditCard.style.display = 'none';
+  payPal.style.display = 'block';
+  bitcoin.style.display = 'none';
+} else if (e.target.value == "bitcoin"){
+  creditCard.style.display = 'none';
+  payPal.style.display = 'none';
+  bitcoin.style.display = 'block';
+}
+});
+
+// Above ^CODE WORKS^ dont Touch!! v Code below v is in progress.
