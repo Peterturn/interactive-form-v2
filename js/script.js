@@ -231,9 +231,11 @@ for (let i=0; i<legendary.length; i++){
   }
 
 btn.addEventListener('submit', ()=>{
-
-
-
-
-
+  if(nameTester() && emailtester() && boxTester() && creditCardTester() && zipCodeTester() && cvCodeTester()){
+  submit();
+  }
+  else{
+    console.log('not working like you want it to');
+    preventDefault();
+  }
 });
