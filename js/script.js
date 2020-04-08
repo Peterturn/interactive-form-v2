@@ -12,7 +12,7 @@ const cC = colors.children;
 
 //global var for the over all cost of the activities section
 const activities = document.querySelector('.activities');
-const actCheckboxs = activities.children;
+const checkBoxes = activities.querySelectorAll('input[type="checkbox"]');
 
 //payment section global var
 const payment = document.getElementById('payment');
@@ -21,9 +21,18 @@ const creditCard = document.getElementById('credit-card');
 const payPal = document.getElementById('paypal');
 const bitcoin = document.getElementById('bitcoin');
 
+//Vars for Validation
+const basicInfo = document.querySelector('fieldset');
+const nameField = document.getElementById('name');
+const emailField = document.getElementById('mail');
+const ccNum = document.getElementById('cc-num');
+const zip = document.getElementById('zip');
+const cVv = document.getElementById('cvv');
+
+const legendary = document.querySelectorAll('legend');
 
 //Sets focus on the name field at the loading of the page
-document.getElementById('name').focus();
+nameField.focus();
 
 /*Hides html element at the loading of page but will appear if java script is not working.*/
 otherTitleTextArea.style.display = 'none';
@@ -31,7 +40,6 @@ otherTitleTextArea.style.display = 'none';
 //payment section preset display properties to hide the paypal and bitcoin messages.
 payPal.style.display = 'none';
 bitcoin.style.display = 'none';
-
 
 const titleDropList = document.getElementById('title');
 
@@ -111,12 +119,12 @@ activities.appendChild(div);
 }
 costDiv();
 
+
 //addEventListener that updates cost an disbales selections based on conflict
 activities.addEventListener('change', (e) => {
   let divInnerHTML = document.getElementById('total');
   let changedCheckbox = e.target;
   let isChecked = changedCheckbox.checked;
-  const checkBoxes = activities.querySelectorAll('input[type="checkbox"]');
   let dayTime = changedCheckbox.getAttribute("data-day-and-time");
 
   //if statements that updates total cost.
@@ -133,7 +141,6 @@ activities.addEventListener('change', (e) => {
 //Statement that compares time and date and disbales the other option if conflicting.
   for (let i = 1; i<checkBoxes.length; i++){
     let dayTimeOther = checkBoxes[i].getAttribute("data-day-and-time");
-
       if (dayTime === dayTimeOther && checkBoxes[i] !== changedCheckbox){
         if(isChecked){
         checkBoxes[i].disabled = true;
@@ -170,3 +177,63 @@ if(e.target.value == "credit card"){
 });
 
 // Above ^CODE WORKS^ dont Touch!! v Code below v is in progress.
+//validator functions
+function isValidName(username){
+  return /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/.test(username);
+}
+function isEmailValid(usermail){
+  return /^[^@]+@[^@.]+\.[a-z]+/.test(usermail);
+  //  return /^[a-zA-Z-0-9]+(([',. -!&*][a-zA-Z ])?[a-zA-Z]*)*@[a-zA-Z-0-9]+(([',. -!&*][a-zA-Z ])?[a-zA-Z]*)*[.][a-zA-Z-0-9]+(([',. -!&*][a-zA-Z ])?[a-zA-Z]*)*$/.test(usermail);
+}
+function isValidCreditCardNum(cardNum){
+  return /^\d{4}([ \-]?)((\d{6}\1?\d{5})|(\d{4}\1?\d{4}\1?\d{4}))$/.test(cardNum);
+}
+function isValidZip(zipCode){
+  return /^\d{5}$/.test(zipCode);
+}
+function isValidCv(cvCode){
+  return /^\d{3}$/.test(cvCode);
+}
+
+// section input True False Testers
+function nameTester(){
+  return isValidName(nameField.value);
+}
+function emailtester(){
+  return isEmailValid(emailField.value);
+}
+function boxTester(){
+  for (let i=0; i < checkBoxes.length; i++){
+    if(checkBoxes[i].checked){
+      return true;
+    }
+  }
+}
+function creditCardTester(){
+  return isValidCreditCardNum(ccNum.value);
+}
+function zipCodeTester(){
+  return isValidZip(zip.value);
+}
+function cvCodeTester(){
+  return isValidCv(cVv.value);
+}
+
+
+for (let i=0; i<legendary.length; i++){
+  const spanText = document.createElement('span');
+  spanText.className = 'proTip';
+  spanText.innerText = 'Error information is in the incorrect Format.';
+  //span.style.display = '';
+  legendary[i].appendChild(spanText);
+  }
+
+// basicInfo.addEventListener('submit', (e)=>{
+//    let userInterface = e.target.value;
+//    let trueFalse = isValidName(userInterface);
+//    if (trueFalse){
+//      e.target.style.borderColor = "green";
+//    }else {
+//      e.target.style.borderColor = "red";
+//    }
+//  });
