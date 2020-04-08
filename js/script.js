@@ -29,7 +29,9 @@ const ccNum = document.getElementById('cc-num');
 const zip = document.getElementById('zip');
 const cVv = document.getElementById('cvv');
 
+//Vars for error messages
 const legendary = document.querySelectorAll('legend');
+const btn = document.querySelector('button');
 
 //Sets focus on the name field at the loading of the page
 nameField.focus();
@@ -219,21 +221,19 @@ function cvCodeTester(){
   return isValidCv(cVv.value);
 }
 
-
+//append hidden error messages to display if on submit the information is incorrect
 for (let i=0; i<legendary.length; i++){
   const spanText = document.createElement('span');
   spanText.className = 'proTip';
   spanText.innerText = 'Error information is in the incorrect Format.';
-  //span.style.display = '';
+  spanText.style.display = 'none';
   legendary[i].appendChild(spanText);
   }
 
-// basicInfo.addEventListener('submit', (e)=>{
-//    let userInterface = e.target.value;
-//    let trueFalse = isValidName(userInterface);
-//    if (trueFalse){
-//      e.target.style.borderColor = "green";
-//    }else {
-//      e.target.style.borderColor = "red";
-//    }
-//  });
+btn.addEventListener('submit', ()=>{
+
+
+
+
+
+});
