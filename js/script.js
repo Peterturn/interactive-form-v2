@@ -186,7 +186,8 @@ function isEmailValid(usermail){
   //  return /^[a-zA-Z-0-9]+(([',. -!&*][a-zA-Z ])?[a-zA-Z]*)*@[a-zA-Z-0-9]+(([',. -!&*][a-zA-Z ])?[a-zA-Z]*)*[.][a-zA-Z-0-9]+(([',. -!&*][a-zA-Z ])?[a-zA-Z]*)*$/.test(usermail);
 }
 function isValidCreditCardNum(cardNum){
-  return /^\d{4}([ \-]?)((\d{6}\1?\d{5})|(\d{4}\1?\d{4}\1?\d{4}))$/.test(cardNum);
+  //return /^\d{3}([ \-]?)((\d{6}\1?\d{5})|(\d{4}\1?\d{4}\1?\d{4}))$/.test(cardNum);
+  return/\d{4}-?\d{4}-?\d{4}-?\d{4}|\d{3}-?\d{3}-?\d{3}-?\d{4}/.test(cardNum);
 }
 function isValidZip(zipCode){
   return /^\d{5}$/.test(zipCode);
