@@ -18,10 +18,10 @@ const checkBoxes = activities.querySelectorAll('input[type="checkbox"]');
 const payment = document.getElementById('payment');
 const paymentOptions = payment.children;
 const creditCard = document.getElementById('credit-card');
-let creditCardTrue = true;
 const payPal = document.getElementById('paypal');
 const bitcoin = document.getElementById('bitcoin');
-
+//Credit Card true used for the submit handler to know if it should submit the form without cc info.
+let creditCardTrue = true;
 //Vars for Validation
 const basicInfo = document.querySelector('fieldset');
 const nameField = document.getElementById('name');
@@ -237,6 +237,7 @@ for (let i=0; i<legendary.length; i++){
   legendary[i].appendChild(spanText);
   }
 
+//Submit Listener that test if all required parts of the form are filled before submitting
 form.addEventListener('submit', (e)=>{
 //Credit Card
   if(!creditCardTester() && creditCardTrue){
