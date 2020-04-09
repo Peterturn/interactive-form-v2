@@ -1,19 +1,16 @@
                         //Global Var Section
-
-
+//job title selectors
+const titleDropList = document.getElementById('title');
 const otherTitleTextArea = document.getElementById('other-title');
 //Selects the T-shirt "Design:" drop down list node and children
 const selectTheme = document.getElementById('design');
 const sTC = selectTheme.children;
-
 ////Selects the T-shirt "Color:" drop down list node and children
 const colors = document.getElementById('color');
 const cC = colors.children;
-
 //global var for the over all cost of the activities section
 const activities = document.querySelector('.activities');
 const checkBoxes = activities.querySelectorAll('input[type="checkbox"]');
-
 //payment section global var
 const payment = document.getElementById('payment');
 const paymentOptions = payment.children;
@@ -29,25 +26,21 @@ const emailField = document.getElementById('mail');
 const ccNum = document.getElementById('cc-num');
 const zip = document.getElementById('zip');
 const cVv = document.getElementById('cvv');
-
 //Vars for error messages
 const legendary = document.querySelectorAll('legend');
 const btn = document.querySelector('button');
-
 //selects the form for the submit handler
 const form = document.querySelector("form");
 const proTip = document.getElementsByClassName("proTip");
+
+
 //Sets focus on the name field at the loading of the page
 nameField.focus();
-
 /*Hides html element at the loading of page but will appear if java script is not working.*/
 otherTitleTextArea.style.display = 'none';
-
 //payment section preset display properties to hide the paypal and bitcoin messages.
 payPal.style.display = 'none';
 bitcoin.style.display = 'none';
-
-const titleDropList = document.getElementById('title');
 
 //If job role other is chosen, the hidden text area will display for the user.
 titleDropList.addEventListener('change', (e)=>{
@@ -64,7 +57,6 @@ selectTheme.addEventListener('mouseover', (e) => {
 sTC[0].style.display = 'none';
 sTC[0].disabled = true;
 }});
-
 
 /*Function creates and option inside the "colors drop down menu" later this option
 selected = true and disabled = true forcing the user to select a t-shirt theme before continuing.
@@ -124,7 +116,6 @@ div.innerText = 'Total Cost: $ ' +totalCost;
 activities.appendChild(div);
 }
 costDiv();
-
 
 //addEventListener that updates cost an disbales selections based on conflict
 activities.addEventListener('change', (e) => {
