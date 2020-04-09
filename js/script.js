@@ -239,13 +239,13 @@ for (let i=0; i<legendary.length; i++){
 
 form.addEventListener('submit', (e)=>{
     //Name
-    // if(!nameTester()){
-    //   e.preventDefault();
-    //   nameField.focus();
-    //   proTip[0].style.display = 'block';
-    //   nameField.style.borderColor = 'red';
-    //   //console.log('Name field not working like you want it to');
-    //   }
+    if(!nameTester()){
+      e.preventDefault();
+      nameField.focus();
+      proTip[0].style.display = 'block';
+      nameField.style.borderColor = 'red';
+      //console.log('Name field not working like you want it to');
+      }
   //eMail
     if(!emailTester()){
       e.preventDefault();
