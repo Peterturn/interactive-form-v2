@@ -238,51 +238,25 @@ for (let i=0; i<legendary.length; i++){
   }
 
 form.addEventListener('submit', (e)=>{
-    //Name
-    if(!nameTester()){
-      e.preventDefault();
-      nameField.focus();
-      proTip[0].style.display = 'block';
-      nameField.style.borderColor = 'red';
-      //console.log('Name field not working like you want it to');
-      }
-  //eMail
-    if(!emailTester()){
-      e.preventDefault();
-      emailField.focus();
-      proTip[0].style.display = 'block';
-      emailField.style.borderColor = 'red';
-      //console.log('eMail field not working like you want it to');
-      }
-  //Activity Boxes
-    if(!boxTester()){
-      e.preventDefault();
-      const focusBox = activities.querySelector('input[type="checkbox"]');
-      focusBox.focus();
-      proTip[2].style.display = 'block';
-      proTip[2].innerText = "Must select at least one activity";
-      legendary[2].style.borderColor = 'red';
-      //console.log('Box field not working like you want it to');
-      }
-  //Credit Card
-    if(!creditCardTester() && creditCardTrue){
-      e.preventDefault();
-      ccNum.focus();
-      proTip[3].style.display = 'block';
-      proTip[3].innerText = "Must Enter Valid Credit Card Number";
-      ccNum.style.borderColor = 'red';
-      //console.log('CC field not working like you want it to');
-      }
-  //Zip CODE
-    if(creditCardTester() && creditCardTrue && !zipCodeTester()){
-      e.preventDefault();
-      zip.focus();
-      proTip[3].style.display = 'block';
-      proTip[3].innerText = "Must Enter Valid 5 digit zip code";
-      zip.style.borderColor = 'red';
-      //console.log('Zip field not working like you want it to');
+//Credit Card
+  if(!creditCardTester() && creditCardTrue){
+    e.preventDefault();
+    ccNum.focus();
+    proTip[3].style.display = 'block';
+    proTip[3].innerText = "Must Enter Valid Credit Card Number";
+    ccNum.style.borderColor = 'red';
+    //console.log('CC field not working like you want it to');
     }
-  //CVV
+//Zip CODE
+  if(creditCardTester() && creditCardTrue && !zipCodeTester()){
+    e.preventDefault();
+    zip.focus();
+    proTip[3].style.display = 'block';
+    proTip[3].innerText = "Must Enter Valid 5 digit zip code";
+    zip.style.borderColor = 'red';
+    //console.log('Zip field not working like you want it to');
+  }
+//CVV
   if(creditCardTester() && creditCardTrue && zipCodeTester() && !cvCodeTester()){
     e.preventDefault();
     cVv.focus();
@@ -290,5 +264,31 @@ form.addEventListener('submit', (e)=>{
     proTip[3].innerText = "Must Enter Valid 3 digit CVV code";
     cVv.style.borderColor = 'red';
     //console.log('CVV field not working like you want it to');
-  }
+    }
+//Activity Boxes
+  if(!boxTester()){
+    e.preventDefault();
+    const focusBox = activities.querySelector('input[type="checkbox"]');
+    focusBox.focus();
+    proTip[2].style.display = 'block';
+    proTip[2].innerText = "Must select at least one activity";
+    legendary[2].style.borderColor = 'red';
+    //console.log('Box field not working like you want it to');
+    }
+//eMail
+  if(!emailTester()){
+    e.preventDefault();
+    emailField.focus();
+    proTip[0].style.display = 'block';
+    emailField.style.borderColor = 'red';
+    //console.log('eMail field not working like you want it to');
+    }
+//Name
+  if(!nameTester()){
+    e.preventDefault();
+    nameField.focus();
+    proTip[0].style.display = 'block';
+    nameField.style.borderColor = 'red';
+    //console.log('Name field not working like you want it to');
+    }
 });
