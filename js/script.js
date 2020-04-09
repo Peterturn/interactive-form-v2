@@ -18,6 +18,7 @@ const checkBoxes = activities.querySelectorAll('input[type="checkbox"]');
 const payment = document.getElementById('payment');
 const paymentOptions = payment.children;
 const creditCard = document.getElementById('credit-card');
+let creditCardTrue = true;
 const payPal = document.getElementById('paypal');
 const bitcoin = document.getElementById('bitcoin');
 
@@ -33,6 +34,9 @@ const cVv = document.getElementById('cvv');
 const legendary = document.querySelectorAll('legend');
 const btn = document.querySelector('button');
 
+//selects the form for the submit handler
+const form = document.querySelector("form");
+const proTip = document.getElementsByClassName("proTip");
 //Sets focus on the name field at the loading of the page
 nameField.focus();
 
@@ -165,14 +169,17 @@ paymentOptions[0].disabled = true;
 payment.addEventListener('change', (e) => {
 if(e.target.value == "credit card"){
   creditCard.style.display = 'block';
+  creditCardTrue = true;
   payPal.style.display = 'none';
   bitcoin.style.display = 'none';
 } else if (e.target.value == "paypal"){
   creditCard.style.display = 'none';
+  creditCardTrue = false;
   payPal.style.display = 'block';
   bitcoin.style.display = 'none';
 } else if (e.target.value == "bitcoin"){
   creditCard.style.display = 'none';
+  creditCardTrue = false;
   payPal.style.display = 'none';
   bitcoin.style.display = 'block';
 }
@@ -201,7 +208,7 @@ function isValidCv(cvCode){
 function nameTester(){
   return isValidName(nameField.value);
 }
-function emailtester(){
+function emailTester(){
   return isEmailValid(emailField.value);
 }
 function boxTester(){
@@ -230,12 +237,58 @@ for (let i=0; i<legendary.length; i++){
   legendary[i].appendChild(spanText);
   }
 
-btn.addEventListener('submit', ()=>{
-  if(nameTester() && emailtester() && boxTester() && creditCardTester() && zipCodeTester() && cvCodeTester()){
-  submit();
-  }
-  else{
-    console.log('not working like you want it to');
-    preventDefault();
+form.addEventListener('submit', (e)=>{
+    //Name
+    // if(!nameTester()){
+    //   e.preventDefault();
+    //   nameField.focus();
+    //   proTip[0].style.display = 'block';
+    //   nameField.style.borderColor = 'red';
+    //   //console.log('Name field not working like you want it to');
+    //   }
+  //eMail
+    if(!emailTester()){
+      e.preventDefault();
+      emailField.focus();
+      proTip[0].style.display = 'block';
+      emailField.style.borderColor = 'red';
+      //console.log('eMail field not working like you want it to');
+      }
+  //Activity Boxes
+    if(!boxTester()){
+      e.preventDefault();
+      const focusBox = activities.querySelector('input[type="checkbox"]');
+      focusBox.focus();
+      proTip[2].style.display = 'block';
+      proTip[2].innerText = "Must select at least one activity";
+      legendary[2].style.borderColor = 'red';
+      //console.log('Box field not working like you want it to');
+      }
+  //Credit Card
+    if(!creditCardTester() && creditCardTrue){
+      e.preventDefault();
+      ccNum.focus();
+      proTip[3].style.display = 'block';
+      proTip[3].innerText = "Must Enter Valid Credit Card Number";
+      ccNum.style.borderColor = 'red';
+      //console.log('CC field not working like you want it to');
+      }
+  //Zip CODE
+    if(creditCardTester() && creditCardTrue && !zipCodeTester()){
+      e.preventDefault();
+      zip.focus();
+      proTip[3].style.display = 'block';
+      proTip[3].innerText = "Must Enter Valid 5 digit zip code";
+      zip.style.borderColor = 'red';
+      //console.log('Zip field not working like you want it to');
+    }
+  //CVV
+  if(creditCardTester() && creditCardTrue && zipCodeTester() && !cvCodeTester()){
+    e.preventDefault();
+    cVv.focus();
+    proTip[3].style.display = 'block';
+    proTip[3].innerText = "Must Enter Valid 3 digit CVV code";
+    cVv.style.borderColor = 'red';
+    //console.log('CVV field not working like you want it to');
   }
 });
