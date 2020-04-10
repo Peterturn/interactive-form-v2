@@ -15,6 +15,7 @@ const checkBoxes = activities.querySelectorAll('input[type="checkbox"]');
 const payment = document.getElementById('payment');
 const paymentOptions = payment.children;
 const creditCard = document.getElementById('credit-card');
+const ccChildren = creditCard.children;
 const payPal = document.getElementById('paypal');
 const bitcoin = document.getElementById('bitcoin');
 //Credit Card true used for the submit handler to know if it should submit the form without cc info.
@@ -32,7 +33,7 @@ const btn = document.querySelector('button');
 //selects the form for the submit handler
 const form = document.querySelector("form");
 const proTip = document.getElementsByClassName("proTip");
-
+const proTipCc = document.getElementsByClassName("proTipCc");
 
 //Sets focus on the name field at the loading of the page
 nameField.focus();
@@ -42,7 +43,7 @@ otherTitleTextArea.style.display = 'none';
 creditCard.style.display = 'block'
 payPal.style.display = 'none';
 bitcoin.style.display = 'none';
-
+payment[1].selected = true;
 //If job role other is chosen, the hidden text area will display for the user.
 titleDropList.addEventListener('change', (e)=>{
   if (e.target.value == "other"){
@@ -222,6 +223,7 @@ function cvCodeTester(){
 }
 
 //append hidden error messages to display if on submit the information is incorrect
+
 for (let i=0; i<legendary.length; i++){
   const spanText = document.createElement('span');
   spanText.className = 'proTip';
@@ -230,35 +232,60 @@ for (let i=0; i<legendary.length; i++){
   legendary[i].appendChild(spanText);
   }
 
+for (let i=0; i<ccChildren.length; i++){
+  var ccText = document.createElement('p');
+  ccText.className = 'proTipCc';
+  ccText.innerText = 'Error CC information is in the incorrect format.';
+  ccText.style.color = 'red';
+  ccText.style.display = 'none';
+  ccChildren[i].appendChild(ccText);
+  }
+
+
 //Submit Listener that test if all required parts of the form are filled before submitting
 form.addEventListener('submit', (e)=>{
+//------------------------------------------//
+  //CVV
+    if(creditCardTester() && creditCardTrue && zipCodeTester() && !cvCodeTester()){
+      e.preventDefault();
+      cVv.focus();
+      ccText[3].style.display = 'block';
+      ccText[3].innerText = "Must Enter Valid 3 digit CVV code";
+      cVv.style.borderColor = 'red';
+      //console.log('CVV field not working like you want it to');
+    }else {
+      ccText[3].style.display = 'none';
+      cVv.style.borderColor = 'green';}
+  //Zip CODE
+    if(creditCardTester() && creditCardTrue && !zipCodeTester()){
+      e.preventDefault();
+      zip.focus();
+      ccText[2].style.display = 'block';
+      ccText[2].innerText = "Must Enter Valid 5 digit zip code";
+      zip.style.borderColor = 'red';
+      cVv.style.borderColor = 'red';
+      //console.log('Zip field not working like you want it to');
+    }else {
+      ccText[2].style.display = 'none';
+      zip.style.borderColor = 'green';
+    }
+
 //Credit Card
   if(!creditCardTester() && creditCardTrue){
     e.preventDefault();
     ccNum.focus();
-    proTip[3].style.display = 'block';
-    proTip[3].innerText = "Must Enter Valid Credit Card Number";
+    ccText[0].style.display = 'block';
+    ccText[0].innerText = "Must Enter Valid Credit Card Number";
     ccNum.style.borderColor = 'red';
-    //console.log('CC field not working like you want it to');
-    }
-//Zip CODE
-  if(creditCardTester() && creditCardTrue && !zipCodeTester()){
-    e.preventDefault();
-    zip.focus();
-    proTip[3].style.display = 'block';
-    proTip[3].innerText = "Must Enter Valid 5 digit zip code";
     zip.style.borderColor = 'red';
-    //console.log('Zip field not working like you want it to');
-  }
-//CVV
-  if(creditCardTester() && creditCardTrue && zipCodeTester() && !cvCodeTester()){
-    e.preventDefault();
-    cVv.focus();
-    proTip[3].style.display = 'block';
-    proTip[3].innerText = "Must Enter Valid 3 digit CVV code";
     cVv.style.borderColor = 'red';
-    //console.log('CVV field not working like you want it to');
-    }
+    //console.log('CC field not working like you want it to');
+  }else{
+    ccText[0].style.display = 'none';
+    ccNum.style.borderColor = 'green';}
+
+//----------------------------------------------//
+
 //Activity Boxes
   if(!boxTester()){
     e.preventDefault();
@@ -268,7 +295,10 @@ form.addEventListener('submit', (e)=>{
     proTip[2].innerText = "Must select at least one activity";
     legendary[2].style.borderColor = 'red';
     //console.log('Box field not working like you want it to');
-    }
+  }else {
+    proTip[2].style.display = 'none';
+    legendary[2].style.borderColor = 'blue';
+  }
 //eMail
   if(!emailTester()){
     e.preventDefault();
@@ -276,7 +306,10 @@ form.addEventListener('submit', (e)=>{
     proTip[0].style.display = 'block';
     emailField.style.borderColor = 'red';
     //console.log('eMail field not working like you want it to');
-    }
+  } else {
+    proTip[0].style.display = 'none';
+    emailField.style.borderColor = 'green';
+  }
 //Name
   if(!nameTester()){
     e.preventDefault();
@@ -284,5 +317,9 @@ form.addEventListener('submit', (e)=>{
     proTip[0].style.display = 'block';
     nameField.style.borderColor = 'red';
     //console.log('Name field not working like you want it to');
-    }
+  }else if(nameTester() && !emailTester()){
+    proTip[0].style.display = 'block';
+    nameField.style.borderColor = 'green';
+  }else{ proTip[0].style.display = 'none';
+  emailField.style.borderColor = 'green';}
 });
