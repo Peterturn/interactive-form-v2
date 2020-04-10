@@ -39,6 +39,7 @@ nameField.focus();
 /*Hides html element at the loading of page but will appear if java script is not working.*/
 otherTitleTextArea.style.display = 'none';
 //payment section preset display properties to hide the paypal and bitcoin messages.
+creditCard.style.display = 'block'
 payPal.style.display = 'none';
 bitcoin.style.display = 'none';
 
