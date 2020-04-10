@@ -180,7 +180,6 @@ if(e.target.value == "credit card"){
 }
 });
 
-// Above ^CODE WORKS^ dont Touch!! v Code below v is in progress.
 //validator functions
 function isValidName(username){
   return /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/.test(username);
@@ -225,7 +224,6 @@ function cvCodeTester(){
 }
 
 //append hidden error messages to display if on submit the information is incorrect
-
 for (let i=0; i<legendary.length; i++){
   const spanText = document.createElement('span');
   spanText.className = 'proTip';
@@ -233,7 +231,6 @@ for (let i=0; i<legendary.length; i++){
   spanText.style.display = 'none';
   legendary[i].appendChild(spanText);
   }
-
 
 for (let i=0; i<ccChildren.length; i++){
   const ccText = document.createElement('p');
