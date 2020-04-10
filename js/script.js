@@ -324,4 +324,5 @@ if(!creditCardTester() && creditCardTrue){
     proTip[0].style.display = 'block';
     nameField.style.borderColor = 'green';
   }else {nameField.style.borderColor = 'green';}
+
 });
