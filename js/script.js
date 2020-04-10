@@ -48,7 +48,9 @@ payment[1].selected = true;
 titleDropList.addEventListener('change', (e)=>{
   if (e.target.value == "other"){
   otherTitleTextArea.style.display = '';
-  }
+}else{
+  otherTitleTextArea.style.display = 'none';
+}
 });
 
 /*Removes the select Theme node from the list of options IN the "Design:" list
