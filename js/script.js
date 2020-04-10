@@ -19,7 +19,7 @@ const ccChildren = creditCard.children;
 const payPal = document.getElementById('paypal');
 const bitcoin = document.getElementById('bitcoin');
 //Credit Card true used for the submit handler to know if it should submit the form without cc info.
-const creditCardTrue = true;
+let creditCardTrue = true;
 //Vars for Validation
 const basicInfo = document.querySelector('fieldset');
 const nameField = document.getElementById('name');
@@ -168,11 +168,13 @@ if(e.target.value == "credit card"){
 } else if (e.target.value == "paypal"){
   creditCard.style.display = 'none';
   creditCardTrue = false;
+  payment[1].selected = false;
   payPal.style.display = 'block';
   bitcoin.style.display = 'none';
 } else if (e.target.value == "bitcoin"){
   creditCard.style.display = 'none';
   creditCardTrue = false;
+  payment[1].selected = false;
   payPal.style.display = 'none';
   bitcoin.style.display = 'block';
 }
@@ -189,7 +191,7 @@ function isEmailValid(usermail){
 }
 function isValidCreditCardNum(cardNum){
   //return /^\d{3}([ \-]?)((\d{6}\1?\d{5})|(\d{4}\1?\d{4}\1?\d{4}))$/.test(cardNum);
-  return/^\d{3}-?\d{3}-?\d{3}-?\d{4}$|^\d{4}-?\d{4}-?\d{4}-?\d{4}$/.test(cardNum);
+  return/^\d{3}-?\d{3}-?\d{3}-?\d{4}$|^\d{4}-?\d{4}-?\d{4}-?\d{4}?$/.test(cardNum);
 }
 function isValidZip(zipCode){
   return /^\d{5}$/.test(zipCode);
@@ -247,18 +249,18 @@ for (let i=0; i<ccChildren.length; i++){
 form.addEventListener('submit', (e)=>{
 //------------------------------------------//
   //CVV
-    if(creditCardTester() && creditCardTrue && zipCodeTester() && !cvCodeTester()){
+   if(creditCardTester() && creditCardTrue && zipCodeTester() && !cvCodeTester()){
       e.preventDefault();
       cVv.focus();
       proTipcc[2].style.display = 'block';
       proTipcc[2].innerText = "Must Enter Valid 3 digit CVV code";
       cVv.style.borderColor = 'red';
       //console.log('CVV field not working like you want it to');
-    }else {
+    }else{
       proTipcc[2].style.display = 'none';
       cVv.style.borderColor = 'green';}
   //Zip CODE
-    if(creditCardTester() && creditCardTrue && !zipCodeTester()){
+  if(creditCardTester() && creditCardTrue && !zipCodeTester()){
       e.preventDefault();
       zip.focus();
       proTipcc[1].style.display = 'block';
@@ -272,11 +274,11 @@ form.addEventListener('submit', (e)=>{
     }
 
 //Credit Card
-  if(!creditCardTester() && creditCardTrue){
+if(!creditCardTester() && creditCardTrue){
     e.preventDefault();
     ccNum.focus();
     proTipcc[0].style.display = 'block';
-    proTipcc[0].innerText = "Must Enter Valid Credit Card Number";
+    proTipcc[0].innerText = "Must Enter Valid Credit Card Number of '13' or '16' digits";
     ccNum.style.borderColor = 'red';
     zip.style.borderColor = 'red';
     cVv.style.borderColor = 'red';
@@ -321,5 +323,5 @@ form.addEventListener('submit', (e)=>{
   } else if (nameTester() && !emailTester()){
     proTip[0].style.display = 'block';
     nameField.style.borderColor = 'green';
-  }
+  }else {nameField.style.borderColor = 'green';}
 });
