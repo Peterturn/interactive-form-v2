@@ -19,7 +19,7 @@ const ccChildren = creditCard.children;
 const payPal = document.getElementById('paypal');
 const bitcoin = document.getElementById('bitcoin');
 //Credit Card true used for the submit handler to know if it should submit the form without cc info.
-let creditCardTrue = true;
+const creditCardTrue = true;
 //Vars for Validation
 const basicInfo = document.querySelector('fieldset');
 const nameField = document.getElementById('name');
@@ -33,7 +33,7 @@ const btn = document.querySelector('button');
 //selects the form for the submit handler
 const form = document.querySelector("form");
 const proTip = document.getElementsByClassName("proTip");
-const proTipCc = document.getElementsByClassName("proTipCc");
+const proTipcc = document.getElementsByClassName("proTipcc");
 
 //Sets focus on the name field at the loading of the page
 nameField.focus();
@@ -189,7 +189,7 @@ function isEmailValid(usermail){
 }
 function isValidCreditCardNum(cardNum){
   //return /^\d{3}([ \-]?)((\d{6}\1?\d{5})|(\d{4}\1?\d{4}\1?\d{4}))$/.test(cardNum);
-  return/\d{4}-?\d{4}-?\d{4}-?\d{4}|\d{3}-?\d{3}-?\d{3}-?\d{4}/.test(cardNum);
+  return/^\d{3}-?\d{3}-?\d{3}-?\d{4}$|^\d{4}-?\d{4}-?\d{4}-?\d{4}$/.test(cardNum);
 }
 function isValidZip(zipCode){
   return /^\d{5}$/.test(zipCode);
@@ -233,6 +233,14 @@ for (let i=0; i<legendary.length; i++){
   }
 
 
+for (let i=0; i<ccChildren.length; i++){
+  const ccText = document.createElement('p');
+  ccText.className = 'proTipcc';
+  ccText.innerText = 'Error information is in the incorrect Format.';
+  ccText.style.color = 'red'
+  ccText.style.display = 'none';
+  ccChildren[i].appendChild(ccText);
+  }
 
 
 //Submit Listener that test if all required parts of the form are filled before submitting
@@ -242,24 +250,24 @@ form.addEventListener('submit', (e)=>{
     if(creditCardTester() && creditCardTrue && zipCodeTester() && !cvCodeTester()){
       e.preventDefault();
       cVv.focus();
-      ccText[3].style.display = 'block';
-      ccText[3].innerText = "Must Enter Valid 3 digit CVV code";
+      proTipcc[2].style.display = 'block';
+      proTipcc[2].innerText = "Must Enter Valid 3 digit CVV code";
       cVv.style.borderColor = 'red';
       //console.log('CVV field not working like you want it to');
     }else {
-      ccText[3].style.display = 'none';
+      proTipcc[2].style.display = 'none';
       cVv.style.borderColor = 'green';}
   //Zip CODE
     if(creditCardTester() && creditCardTrue && !zipCodeTester()){
       e.preventDefault();
       zip.focus();
-      ccText[2].style.display = 'block';
-      ccText[2].innerText = "Must Enter Valid 5 digit zip code";
+      proTipcc[1].style.display = 'block';
+      proTipcc[1].innerText = "Must Enter Valid 5 digit zip code";
       zip.style.borderColor = 'red';
       cVv.style.borderColor = 'red';
       //console.log('Zip field not working like you want it to');
     }else {
-      ccText[2].style.display = 'none';
+      proTipcc[1].style.display = 'none';
       zip.style.borderColor = 'green';
     }
 
@@ -267,14 +275,14 @@ form.addEventListener('submit', (e)=>{
   if(!creditCardTester() && creditCardTrue){
     e.preventDefault();
     ccNum.focus();
-    ccText[0].style.display = 'block';
-    ccText[0].innerText = "Must Enter Valid Credit Card Number";
+    proTipcc[0].style.display = 'block';
+    proTipcc[0].innerText = "Must Enter Valid Credit Card Number";
     ccNum.style.borderColor = 'red';
     zip.style.borderColor = 'red';
     cVv.style.borderColor = 'red';
     //console.log('CC field not working like you want it to');
   }else{
-    ccText[0].style.display = 'none';
+    proTipcc[0].style.display = 'none';
     ccNum.style.borderColor = 'green';}
 
 //----------------------------------------------//
@@ -310,5 +318,8 @@ form.addEventListener('submit', (e)=>{
     proTip[0].style.display = 'block';
     nameField.style.borderColor = 'red';
     //console.log('Name field not working like you want it to');
+  } else if (nameTester() && !emailTester()){
+    proTip[0].style.display = 'block';
+    nameField.style.borderColor = 'green';
   }
-}); 
+});
