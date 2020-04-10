@@ -191,8 +191,8 @@ function isEmailValid(usermail){
   //  return /^[a-zA-Z-0-9]+(([',. -!&*][a-zA-Z ])?[a-zA-Z]*)*@[a-zA-Z-0-9]+(([',. -!&*][a-zA-Z ])?[a-zA-Z]*)*[.][a-zA-Z-0-9]+(([',. -!&*][a-zA-Z ])?[a-zA-Z]*)*$/.test(usermail);
 }
 function isValidCreditCardNum(cardNum){
+  return/^[0-9]{13,16}$/.test(cardNum);
   //return /^\d{3}([ \-]?)((\d{6}\1?\d{5})|(\d{4}\1?\d{4}\1?\d{4}))$/.test(cardNum);
-  return/^\d{3}-?\d{3}-?\d{3}-?\d{4}$|^\d{4}-?\d{4}-?\d{4}-?\d{4}?$/.test(cardNum);
 }
 function isValidZip(zipCode){
   return /^\d{5}$/.test(zipCode);
@@ -246,7 +246,7 @@ for (let i=0; i<ccChildren.length; i++){
 
 //Submit Listener that test if all required parts of the form are filled before submitting
 form.addEventListener('submit', (e)=>{
-//------------------------------------------//
+//-------------Credit Card Section------------------//
   //CVV
    if(creditCardTester() && creditCardTrue && zipCodeTester() && !cvCodeTester()){
       e.preventDefault();
@@ -258,6 +258,7 @@ form.addEventListener('submit', (e)=>{
     }else{
       proTipcc[2].style.display = 'none';
       cVv.style.borderColor = 'green';}
+
   //Zip CODE
   if(creditCardTester() && creditCardTrue && !zipCodeTester()){
       e.preventDefault();
@@ -277,7 +278,7 @@ if(!creditCardTester() && creditCardTrue){
     e.preventDefault();
     ccNum.focus();
     proTipcc[0].style.display = 'block';
-    proTipcc[0].innerText = "Must Enter Valid Credit Card Number of '13' or '16' digits";
+    proTipcc[0].innerText = "Must Enter Valid Credit Card Number between '13-16' digits";
     ccNum.style.borderColor = 'red';
     zip.style.borderColor = 'red';
     cVv.style.borderColor = 'red';
@@ -286,7 +287,7 @@ if(!creditCardTester() && creditCardTrue){
     proTipcc[0].style.display = 'none';
     ccNum.style.borderColor = 'green';}
 
-//----------------------------------------------//
+//-------------Boxes---------------------//
 
 //Activity Boxes
   if(!boxTester()){
@@ -301,6 +302,9 @@ if(!creditCardTester() && creditCardTrue){
     proTip[2].style.display = 'none';
     legendary[2].style.borderColor = 'blue';
   }
+
+//-------------------- Basic Info ---------------------//
+
 //eMail
   if(!emailTester()){
     e.preventDefault();
