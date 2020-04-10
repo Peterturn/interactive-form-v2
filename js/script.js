@@ -232,14 +232,7 @@ for (let i=0; i<legendary.length; i++){
   legendary[i].appendChild(spanText);
   }
 
-for (let i=0; i<ccChildren.length; i++){
-  var ccText = document.createElement('p');
-  ccText.className = 'proTipCc';
-  ccText.innerText = 'Error CC information is in the incorrect format.';
-  ccText.style.color = 'red';
-  ccText.style.display = 'none';
-  ccChildren[i].appendChild(ccText);
-  }
+
 
 
 //Submit Listener that test if all required parts of the form are filled before submitting
@@ -317,9 +310,5 @@ form.addEventListener('submit', (e)=>{
     proTip[0].style.display = 'block';
     nameField.style.borderColor = 'red';
     //console.log('Name field not working like you want it to');
-  }else if(nameTester() && !emailTester()){
-    proTip[0].style.display = 'block';
-    nameField.style.borderColor = 'green';
-  }else{ proTip[0].style.display = 'none';
-  emailField.style.borderColor = 'green';}
-});
+  }
+}); 
