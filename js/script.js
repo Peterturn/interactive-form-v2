@@ -238,7 +238,7 @@ for (let i=0; i<ccChildren.length; i++){
   const ccText = document.createElement('p');
   ccText.className = 'proTipcc';
   ccText.innerText = 'Error information is in the incorrect Format.';
-  ccText.style.color = 'red'
+  ccText.style.color = '#FF6347'
   ccText.style.display = 'none';
   ccChildren[i].appendChild(ccText);
   }
@@ -253,7 +253,7 @@ form.addEventListener('submit', (e)=>{
       cVv.focus();
       proTipcc[2].style.display = 'block';
       proTipcc[2].innerText = "Must Enter Valid 3 digit CVV code";
-      cVv.style.borderColor = 'red';
+      cVv.style.borderColor = '#FF6347';
       //console.log('CVV field not working like you want it to');
     }else{
       proTipcc[2].style.display = 'none';
@@ -265,8 +265,8 @@ form.addEventListener('submit', (e)=>{
       zip.focus();
       proTipcc[1].style.display = 'block';
       proTipcc[1].innerText = "Must Enter Valid 5 digit zip code";
-      zip.style.borderColor = 'red';
-      cVv.style.borderColor = 'red';
+      zip.style.borderColor = '#FF6347';
+      cVv.style.borderColor = '#FF6347';
       //console.log('Zip field not working like you want it to');
     }else {
       proTipcc[1].style.display = 'none';
@@ -279,9 +279,9 @@ if(!creditCardTester() && creditCardTrue){
     ccNum.focus();
     proTipcc[0].style.display = 'block';
     proTipcc[0].innerText = "Must Enter Valid Credit Card Number between '13-16' digits";
-    ccNum.style.borderColor = 'red';
-    zip.style.borderColor = 'red';
-    cVv.style.borderColor = 'red';
+    ccNum.style.borderColor = '#FF6347';
+    zip.style.borderColor = '#FF6347';
+    cVv.style.borderColor = '#FF6347';
     //console.log('CC field not working like you want it to');
   }else{
     proTipcc[0].style.display = 'none';
@@ -296,7 +296,7 @@ if(!creditCardTester() && creditCardTrue){
     focusBox.focus();
     proTip[2].style.display = 'block';
     proTip[2].innerText = "Must select at least one activity";
-    legendary[2].style.borderColor = 'red';
+    legendary[2].style.borderColor = '#FF6347';
     //console.log('Box field not working like you want it to');
   }else {
     proTip[2].style.display = 'none';
@@ -310,7 +310,7 @@ if(!creditCardTester() && creditCardTrue){
     e.preventDefault();
     emailField.focus();
     proTip[0].style.display = 'block';
-    emailField.style.borderColor = 'red';
+    emailField.style.borderColor = '#FF6347';
     //console.log('eMail field not working like you want it to');
   } else {
     proTip[0].style.display = 'none';
@@ -321,7 +321,7 @@ if(!creditCardTester() && creditCardTrue){
     e.preventDefault();
     nameField.focus();
     proTip[0].style.display = 'block';
-    nameField.style.borderColor = 'red';
+    nameField.style.borderColor = '#FF6347'; //tomato
     //console.log('Name field not working like you want it to');
   } else if (nameTester() && !emailTester()){
     proTip[0].style.display = 'block';
